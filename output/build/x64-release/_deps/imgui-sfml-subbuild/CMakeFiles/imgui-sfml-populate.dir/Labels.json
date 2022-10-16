@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-release/_deps/imgui-sfml-subbuild/CMakeFiles/imgui-sfml-populate"
+		},
+		{
+			"file" : "C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-release/_deps/imgui-sfml-subbuild/CMakeFiles/imgui-sfml-populate.rule"
+		},
+		{
+			"file" : "C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-release/_deps/imgui-sfml-subbuild/CMakeFiles/imgui-sfml-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-release/_deps/imgui-sfml-subbuild/imgui-sfml-populate-prefix/src/imgui-sfml-populate-stamp/imgui-sfml-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-release/_deps/imgui-sfml-subbuild/imgui-sfml-populate-prefix/src/imgui-sfml-populate-stamp/imgui-sfml-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-release/_deps/imgui-sfml-subbuild/imgui-sfml-populate-prefix/src/imgui-sfml-populate-stamp/imgui-sfml-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-release/_deps/imgui-sfml-subbuild/imgui-sfml-populate-prefix/src/imgui-sfml-populate-stamp/imgui-sfml-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-release/_deps/imgui-sfml-subbuild/imgui-sfml-populate-prefix/src/imgui-sfml-populate-stamp/imgui-sfml-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-release/_deps/imgui-sfml-subbuild/imgui-sfml-populate-prefix/src/imgui-sfml-populate-stamp/imgui-sfml-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-release/_deps/imgui-sfml-subbuild/imgui-sfml-populate-prefix/src/imgui-sfml-populate-stamp/imgui-sfml-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-release/_deps/imgui-sfml-subbuild/imgui-sfml-populate-prefix/src/imgui-sfml-populate-stamp/imgui-sfml-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"imgui-sfml-populate"
+		],
+		"name" : "imgui-sfml-populate"
+	}
+}
