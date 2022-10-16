@@ -16,7 +16,6 @@ const double pi = 3.1415926535897931;
 #include <implot/implot.h> 
 
 class Mesh {
-	// qnnlwnl
 public:
 	Mesh(const double L, const double T, const double dx, const double dt) {
 		len_x = floor(L / dx) + 1;
@@ -53,6 +52,8 @@ private:
 	std::vector<std::tuple<double, double, double>> mesh; // where tuple contains x, t, u values
 	unsigned int len_x;
 	unsigned int len_t;
+
+	int a;
 };
 
 void solve_wave(
@@ -86,7 +87,7 @@ void solve_wave(
 		// TODO можно улучшить если использовать разложение g_2 в ряд тейлора
 		u = g_1(x) + dt * g_2(x);
 	}
-
+	// setting boundary condition for first layer
 	{
 		auto& [x, t, u] = mesh(0, 1);
 		u = f_0(t);
@@ -120,25 +121,180 @@ void solve_wave(
 }
 
 
+class Mesh3D {
+public:
+	Mesh3D(const double L_x, const double L_y, const double L_z, const double L_t, 
+		const double dl, const double dt) {
+		
+		len_x = ceil(L_x / dl) + 1;
+		len_y = ceil(L_y / dl) + 1;
+		len_z = ceil(L_z / dl) + 1;
+		len_t = ceil(L_t / dt) + 1;
+
+		mesh.resize(len_x * len_y * len_z * len_t);
+
+		for (int i = 0; i < len_t; ++i) {
+			for (int j = 0; j < len_x; ++j) {
+				for (int k = 0; k < len_y; ++k) {
+					for (int n = 0; n < len_z; n++) {
+						auto& [x, y, z, t, u] = 
+							mesh[i + j * len_x + k * len_x * len_y + n * len_x * len_y * len_z];
+						x = j * dl;
+						y = k * dl;
+						z = n * dl;
+						t = i * dt;
+					}
+				}
+			}
+		}
+	}
+
+	unsigned int getLenX() const {
+		return len_x;
+	}
+	unsigned int getLenY() const {
+		return len_y;
+	}
+	unsigned int getLenZ() const {
+		return len_z;
+	}
+	unsigned int getLenT() const {
+		return len_t;
+	}
+
+
+	std::tuple<double, double, double, double, double>& operator()
+		(const int i, const int j, const int k, const int n) {
+		// TODO проверять вылезаем ли за сетку
+		return mesh[i + j * len_x + k * len_x * len_y + n * len_x * len_y * len_z];
+	}
+	std::tuple<double, double, double, double, double> operator()
+		(const int i, const int j, const int k, const int n) const {
+		// TODO проверять вылезаем ли за сетку
+		return mesh[i + j * len_x + k * len_x * len_y + n * len_x * len_y * len_z];
+	}
+private:
+	std::vector<std::tuple<double, double, double, double, double>> mesh; // where tuple contains x, y, z, t, u values
+	unsigned int len_x;
+	unsigned int len_y;
+	unsigned int len_z;
+	unsigned int len_t;
+};
+
+
+void solve_wave_3d(
+	Mesh3D& mesh,
+	const double C,
+	const std::function<double(double)> f_0,
+	const std::function<double(double)> f_l,
+	const std::function<double(double, double, double)> g_1,
+	const std::function<double(double, double, double)> g_2) {
+
+	const unsigned int len_x = mesh.getLenX();
+	const unsigned int len_y = mesh.getLenY();
+	const unsigned int len_z = mesh.getLenZ();
+	const unsigned int len_t = mesh.getLenT();
+
+	const double dl = std::get<0>(mesh(1, 0, 0, 0)) - std::get<0>(mesh(0, 0, 0, 0));
+	const double dt = std::get<1>(mesh(0, 0, 0, 1)) - std::get<1>(mesh(0, 0, 0, 1));
+
+
+	// Setting initial condition
+	for (int i = 0; i < len_x; ++i) {
+		for (int j = 0; j < len_y; ++j) {
+			for (int k = 0; k < len_z; ++k) {
+				auto& [x, y, z, t, u] = mesh(i, j, k, 0);
+				u = g_1(x, y, z);
+			}
+		}
+	}
+	for (int i = 1; i < len_x; ++i) {
+		for (int j = 1; j < len_y; ++j) {
+			for (int k = 1; k < len_z; ++k) {
+				auto& [x, y, z, t, u] = mesh(i, j, k, 1);
+				// TODO можно улучить если увеличить класс гладкости
+				u = g_1(x, y, z) + dt * g_2(x, y, z);
+			}
+		}
+	}
+	//* Set boundary condition для второго layer
+	auto set_all_boundaries = [&](double time) {
+		auto set_boundary = [&mesh, f_0, time](double len_x, double len_y, double len_z,
+			bool take_x, bool take_y, bool take_z) {
+				for (int i = 0 - !take_x; i < len_x * take_x; ++i * take_x) {
+					for (int j = 0 - !take_y; j < len_y * take_y; ++j * take_y) {
+						for (int k = 0 - !take_z; k < len_z * take_z; ++k * take_z) {
+							// if (i == -1 && j == -1; && k == -1;)
+							auto& [x, y, z, t, u] = mesh(
+								i * take_x + !take_x * len_x,
+								j * take_y + !take_y * len_y,
+								k * take_z + !take_z * len_z, time);
+							u = f_0(t);
+						}
+					}
+				}
+		};
+
+		set_boundary(0, 0, 0, true, true, false);
+		set_boundary(0, 0, 0, true, false, true);
+		set_boundary(0, 0, 0, false, true, false);
+		set_boundary(0, 0, len_z - 1, true, true, false);
+		set_boundary(0, len_y - 1, 0, true, false, true);
+		set_boundary(len_x - 1, 0, 0, false, true, false);
+	};
+
+	set_all_boundaries(1);
+	
+	const double C2 = C * C;
+	for (int n = 1; n < len_t - 1; ++n) {
+		set_all_boundaries(n+1);
+		for (int i = 1; i < len_x - 1; ++i) {
+			for (int j = 1; j < len_y - 1; ++j) {
+				for (int k = 1; k < len_z - 1; ++k) {
+					double& u_next = std::get<4>(mesh(i, j, k , n+1));
+					{
+						const double u_left = std::get<4>(mesh(i - 1, j, k, n));
+						const double u_right = std::get<4>(mesh(i + 1, j, k, n));
+						const double u_center = std::get<4>(mesh(i, j, k, n));
+						u_next += C2 * (u_right - 2 * u_center + u_left);
+					}
+					{
+						const double u_left = std::get<4>(mesh(i, j - 1, k, n));
+						const double u_right = std::get<4>(mesh(i, j + 1, k, n));
+						const double u_center = std::get<4>(mesh(i, j, k, n));
+						u_next += C2 * (u_right - 2 * u_center + u_left);
+					}
+					{
+						const double u_left = std::get<4>(mesh(i, j, k - 1, n));
+						const double u_right = std::get<4>(mesh(i, j, k + 1, n));
+						const double u_center = std::get<4>(mesh(i, j, k, n));
+						u_next += C2 * (u_right - 2 * u_center + u_left);
+					}
+					{
+						const double u_center = std::get<4>(mesh(i, j, k, n));
+						const double u_bottom = std::get<4>(mesh(i, j, k, n - 1));
+						u_next += 2 * u_center - u_bottom;
+					}
+				}
+			}
+		}
+	}
+}
+
 double zero(double) {
 	return 0.;
 }
 
-double foo(double x) {
-	if (0 <= x <= 1) return x;
-	else if (1 <= x <= 2) return 2-x;
-}
-
 int main() {
-	double L = 2;
-	double T = 2;
+	double L = 1;
+	double T = 1;
 	double dx = 0.005;
 	double dt = 0.001;
 	double a = 1;
 	double C = dt / dx * a;
 
 	Mesh mesh(L, T, dx, dt);
-	solve_wave(mesh, C, zero, zero, zero, foo);
+	solve_wave(mesh, C, zero, zero, [](double x) { return sin(pi * x); }, zero);
 	
 	std::vector<double> numerical_x;
 	std::vector<double> numerical_u;
@@ -162,11 +318,11 @@ int main() {
 		target_x.push_back(x);
 
 		double result = 0;
-		for (int n = 1; n < 10000; n+=2) {
-			result += 8. / (pi * pi * n * n) * sin(pi * n * t / 2) * sin(pi * n * x / 2);
-			result -= 8. / (pi * pi * (n+1) * (n+1)) * sin(pi * (n + 1) * t / 2) * sin(pi * (n + 1) * x / 2);
-		}
-
+		//for (int n = 1; n < 10000; n+=2) {
+		//	/*result += 8. / (pi * pi * n * n) * sin(pi * n * t / 2) * sin(pi * n * x / 2);
+		//	result -= 8. / (pi * pi * (n+1) * (n+1)) * sin(pi * (n + 1) * t / 2) * sin(pi * (n + 1) * x / 2);*/
+		//}
+		result = cos(pi * t) * sin(pi * x);
 		target_u.push_back(result);
 	}
 
