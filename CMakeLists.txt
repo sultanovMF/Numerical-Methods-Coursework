@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION  3.14)
 
 project ("kushtau")
 
@@ -10,6 +10,9 @@ if(CCACHE_FOUND)
 endif(CCACHE_FOUND)
 
 
-add_subdirectory(coursework)
+add_subdirectory(source)
 add_subdirectory(dependencies)
 add_subdirectory(tests)
+add_subdirectory(murlib)
+
+find_package(Python COMPONENTS Interpreter)

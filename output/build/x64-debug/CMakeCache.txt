@@ -24,7 +24,7 @@ CCACHE_FOUND:FILEPATH=CCACHE_FOUND-NOTFOUND
 //Path to a program.
 CMAKE_AR:FILEPATH=C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.33.31629/bin/Hostx64/x64/lib.exe
 
-//Choose the type of build (Debug or Release)
+//No help, variable specified on the command line.
 CMAKE_BUILD_TYPE:STRING=Debug
 
 //No help, variable specified on the command line.
@@ -314,6 +314,12 @@ FREETYPE_INCLUDE_DIR_ft2build:PATH=C:/Users/mur-m/OneDrive/Documents/Courseworks
 //Path to a library.
 FREETYPE_LIBRARY:FILEPATH=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/_deps/sfml-src/extlibs/libs-msvc-universal/x64/freetype.lib
 
+//gcem test suite
+GCEM_BUILD_TESTS:BOOL=OFF
+
+//install path for gcemConfig.cmake
+GCEM_CMAKECONFIG_INSTALL_DIR:STRING=lib/cmake/gcem
+
 //Git command line client
 GIT_EXECUTABLE:FILEPATH=C:/Program Files/Git/cmd/git.exe
 
@@ -423,6 +429,24 @@ VORBIS_INCLUDE_DIR:PATH=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework
 VORBIS_LIBRARY:FILEPATH=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/_deps/sfml-src/extlibs/libs-msvc-universal/x64/vorbis.lib
 
 //Value Computed by CMake
+doctests_BINARY_DIR:STATIC=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/dependencies/doctest
+
+//Value Computed by CMake
+doctests_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+doctests_SOURCE_DIR:STATIC=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/dependencies/doctest
+
+//Value Computed by CMake
+gcem_BINARY_DIR:STATIC=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/dependencies/gcem
+
+//Value Computed by CMake
+gcem_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+gcem_SOURCE_DIR:STATIC=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/dependencies/gcem
+
+//Value Computed by CMake
 imgui_sfml_BINARY_DIR:STATIC=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/_deps/imgui-sfml-build
 
 //Value Computed by CMake
@@ -437,11 +461,17 @@ implot_BINARY_DIR:STATIC=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursewor
 //Value Computed by CMake
 implot_IS_TOP_LEVEL:STATIC=OFF
 
-//Dependencies for the target
-implot_LIB_DEPENDS:STATIC=general;ImGui-SFML::ImGui-SFML;
-
 //Value Computed by CMake
 implot_SOURCE_DIR:STATIC=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/dependencies/implot
+
+//Value Computed by CMake
+indicators_BINARY_DIR:STATIC=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/dependencies/indicators
+
+//Value Computed by CMake
+indicators_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+indicators_SOURCE_DIR:STATIC=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/dependencies/indicators
 
 //Value Computed by CMake
 kushtau_BINARY_DIR:STATIC=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug
@@ -451,6 +481,15 @@ kushtau_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 kushtau_SOURCE_DIR:STATIC=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework
+
+//Value Computed by CMake
+murlib_BINARY_DIR:STATIC=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/murlib
+
+//Value Computed by CMake
+murlib_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+murlib_SOURCE_DIR:STATIC=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/murlib
 
 //Dependencies for the target
 sfml-audio_LIB_DEPENDS:STATIC=general;sfml-system;
@@ -599,7 +638,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MT
 CMAKE_MT-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=16
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //noop for ranlib
@@ -651,6 +690,8 @@ FIND_PACKAGE_MESSAGE_DETAILS_FLAC:INTERNAL=[C:/Users/mur-m/OneDrive/Documents/Co
 FIND_PACKAGE_MESSAGE_DETAILS_OpenAL:INTERNAL=[C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/_deps/sfml-src/extlibs/libs-msvc-universal/x64/openal32.lib][C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/_deps/sfml-src/extlibs/headers/AL][v()]
 //Details about finding OpenGL
 FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[opengl32][c ][v()]
+//Details about finding Python
+FIND_PACKAGE_MESSAGE_DETAILS_Python:INTERNAL=[C:/Users/mur-m/AppData/Local/Programs/Python/Python310/python.exe][cfound components: Interpreter ][v3.10.7()]
 //Details about finding VORBIS
 FIND_PACKAGE_MESSAGE_DETAILS_VORBIS:INTERNAL=[C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/_deps/sfml-src/extlibs/libs-msvc-universal/x64/vorbisenc.lib;C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/_deps/sfml-src/extlibs/libs-msvc-universal/x64/vorbisfile.lib;C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/_deps/sfml-src/extlibs/libs-msvc-universal/x64/vorbis.lib;C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/_deps/sfml-src/extlibs/libs-msvc-universal/x64/ogg.lib][C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/_deps/sfml-src/extlibs/headers][C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/build/x64-debug/_deps/sfml-src/extlibs/headers][v()]
 //ADVANCED property for variable: FLAC_INCLUDE_DIR
@@ -663,6 +704,9 @@ FREETYPE_INCLUDE_DIR_freetype2-ADVANCED:INTERNAL=1
 FREETYPE_INCLUDE_DIR_ft2build-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: FREETYPE_LIBRARY
 FREETYPE_LIBRARY-ADVANCED:INTERNAL=1
+GCEM_VERSION_MAJOR:INTERNAL=1
+GCEM_VERSION_MINOR:INTERNAL=16
+GCEM_VERSION_PATCH:INTERNAL=0
 //ADVANCED property for variable: GIT_EXECUTABLE
 GIT_EXECUTABLE-ADVANCED:INTERNAL=1
 //Result of TRY_COMPILE
@@ -697,4 +741,9 @@ VORBIS_INCLUDE_DIR-ADVANCED:INTERNAL=1
 VORBIS_LIBRARY-ADVANCED:INTERNAL=1
 //CMAKE_INSTALL_PREFIX during last run
 _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=C:/Users/mur-m/OneDrive/Documents/Courseworks/Coursework V/Numerical Methods Coursework/output/install/x64-debug
+//Path to a program.
+_Python_EXECUTABLE:INTERNAL=C:/Users/mur-m/AppData/Local/Programs/Python/Python310/python.exe
+//Python Properties
+_Python_INTERPRETER_PROPERTIES:INTERNAL=Python;3;10;7;64;;cp310-win_amd64;C:\Users\mur-m\AppData\Local\Programs\Python\Python310\Lib;C:\Users\mur-m\AppData\Local\Programs\Python\Python310\Lib;C:\Users\mur-m\AppData\Local\Programs\Python\Python310\Lib\site-packages;C:\Users\mur-m\AppData\Local\Programs\Python\Python310\Lib\site-packages
+_Python_INTERPRETER_SIGNATURE:INTERNAL=95be6b8dba8833839db4de8b649621ab
 
